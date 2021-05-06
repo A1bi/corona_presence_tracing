@@ -27,6 +27,8 @@ Gem::Specification.new do |s|
   s.files = `git ls-files -- lib/*`.split('\n')
   s.require_paths = ['lib']
 
+  s.add_dependency 'google-protobuf', '~> 3.15'
+
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rspec', '~> 3.10'
   s.add_development_dependency 'rubocop', '~> 1.13'

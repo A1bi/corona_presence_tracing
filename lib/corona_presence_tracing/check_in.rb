@@ -4,7 +4,7 @@ module CoronaPresenceTracing
   class CheckIn
     BASE_URL = 'https://e.coronawarn.app?v=1'
 
-    attr_accessor :description, :address, :type, :start_time, :end_time
+    attr_reader :description, :address, :type, :start_time, :end_time
 
     def initialize(options = {})
       @description = options[:description]
@@ -12,6 +12,9 @@ module CoronaPresenceTracing
       @type = options[:type]
       @start_time = options[:start_time]
       @end_time = options[:end_time]
+
+      @location = TraceLocation.new(version: 1)
+      update_location
     end
 
     def url
@@ -19,6 +22,13 @@ module CoronaPresenceTracing
     end
 
     private
+
+    def update_location
+      @location.description = description
+      @location.address = address
+      @location.startTimestamp = start_time.to_i
+      @location.endTimestamp = end_time.to_i
+    end
 
     def encoded_payload
       'foo'

@@ -1,5 +1,7 @@
 AllCops:
   NewCops: enable
+  Exclude:
+    - 'lib/corona_presence_tracing/proto/*'
 
 Style/Documentation:
   Enabled: false
