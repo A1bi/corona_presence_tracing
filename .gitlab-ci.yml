@@ -2,7 +2,7 @@
   tags: [ruby-2.5]
 
 .bundle: &bundle
-  - bundle config set --local without development
+  - bundle config set --local with development
   - bundle install -j $(sysctl -n hw.ncpu)
 
 rubocop:
