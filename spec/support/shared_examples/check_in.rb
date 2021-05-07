@@ -1,28 +1,18 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples 'generic check-in' do
-  let(:event_data) do
-    start_time = Time.parse('2021-05-01 18:00')
-    {
-      description: 'Fun Activity',
-      address: 'Berlin',
-      start_time: start_time,
-      end_time: start_time + 1
-    }
+RSpec.shared_examples 'raising a validation error' do |attr, error_name|
+  it 'raises an error for a blank attribute' do
+    expect { subject }
+      .to raise_error(CoronaPresenceTracing::ValidationError) do |error|
+        expect(error.attr).to eq(attr)
+        expect(error.error).to eq(error_name)
+      end
   end
+end
 
+RSpec.shared_examples 'generic check-in' do
   describe 'validations' do
     subject { described_class.new(event_data) }
-
-    shared_examples 'raising a validation error' do |attr, error_name|
-      it 'raises an error for a blank attribute' do
-        expect { subject }
-          .to raise_error(CoronaPresenceTracing::ValidationError) do |error|
-            expect(error.attr).to eq(attr)
-            expect(error.error).to eq(error_name)
-          end
-      end
-    end
 
     context 'with an empty description' do
       before { event_data[:description] = nil }

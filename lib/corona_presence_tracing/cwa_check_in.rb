@@ -11,10 +11,10 @@ module CoronaPresenceTracing
     PUBLIC_KEY = 'gwLMzE153tQwAOf2MZoUXXfzWTdlSpfS99iZffmcmxOG9njSK4RTimFOFwDh6t0T' \
                  'yw8XR01ugDYjtuKwjjuK49Oh83FWct6XpefPi9Skjxvvz53i9gaMmUEc96pbtoaA'
 
-    attr_reader :type, :default_check_in_length
+    attr_reader :location_type, :default_check_in_length
 
     def initialize(options = {})
-      @type = options[:type]
+      @location_type = options[:location_type]
       @default_check_in_length = options[:default_check_in_length]
       super
     end
@@ -24,9 +24,13 @@ module CoronaPresenceTracing
     def vendor_data
       CWALocationData.new(
         version: 1,
-        type: type,
+        type: mapped_location_type,
         defaultCheckInLengthInMinutes: default_check_in_length
       )
+    end
+
+    def mapped_location_type
+      CoronaPresenceTracing::TraceLocationType.const_get("LOCATION_TYPE_#{location_type.to_s.upcase}")
     end
   end
 end

@@ -27,7 +27,7 @@ module CoronaPresenceTracing
     private
 
     def validate
-      CheckInValidator.new(self).validate
+      CoronaPresenceTracing.const_get("#{self.class.name}Validator").new(self).validate
     end
 
     def build_payload
