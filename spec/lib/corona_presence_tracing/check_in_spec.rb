@@ -56,7 +56,7 @@ RSpec.describe CoronaPresenceTracing::CheckIn do
   end
 
   describe '#url' do
-    subject { check_in.url }
+    subject(:url) { check_in.url }
 
     let(:check_in) { described_class.new(event_data) }
 
@@ -66,7 +66,7 @@ RSpec.describe CoronaPresenceTracing::CheckIn do
     end
 
     it 'returns a correct URL' do
-      expect(subject)
+      expect(url)
         .to eq('https://e.coronawarn.app?v=1#CAESJAgBEgxGdW4gQWN0aXZpdHkaBkJlcmxpbiiA9rWEBjCB9rWEBhqXAQgBEoABZ3dMTXpFMTUzdFF3QU9mMk1ab1VYWGZ6V1RkbFNwZlM5OWlaZmZtY214T0c5bmpTSzRSVGltRk9Gd0RoNnQwVHl3OFhSMDF1Z0RZanR1S3dqanVLNDlPaDgzRldjdDZYcGVmUGk5U2tqeHZ2ejUzaTlnYU1tVUVjOTZwYnRvYUEaEHIB1CktU-94-5N1e7Rm9as=')
     end
   end
