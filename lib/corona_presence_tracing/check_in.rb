@@ -45,7 +45,7 @@ module CoronaPresenceTracing
       @crowd_notifier_data = CrowdNotifierData.new(
         version: 1,
         publicKey: PUBLIC_KEY,
-        cryptographicSeed: SecureRandom.hex(8)
+        cryptographicSeed: SecureRandom.random_bytes(16)
       )
     end
 
