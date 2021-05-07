@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require_relative 'validator'
+require_relative 'proto/presence_tracing_pb'
+
 require 'base64'
 require 'securerandom'
 
@@ -18,6 +21,7 @@ module CoronaPresenceTracing
       @start_time = options[:start_time]
       @end_time = options[:end_time]
 
+      validate
       build_payload
     end
 
@@ -26,6 +30,10 @@ module CoronaPresenceTracing
     end
 
     private
+
+    def validate
+      CheckInValidator.new(self).validate
+    end
 
     def build_payload
       build_location

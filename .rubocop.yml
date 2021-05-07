@@ -3,5 +3,9 @@ AllCops:
   Exclude:
     - 'lib/corona_presence_tracing/proto/*'
 
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'
+
 Style/Documentation:
   Enabled: false
