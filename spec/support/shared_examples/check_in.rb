@@ -48,7 +48,6 @@ end
 
 RSpec.shared_context 'with static crypto seed' do
   before do
-    allow(SecureRandom).to receive(:random_bytes)
-      .with(16).and_return("r\x01\xD4)-S\xEFx\xFB\x93u{\xB4f\xF5\xAB".b)
+    allow(SecureRandom).to receive(:random_bytes).with(16).and_return('7201d4292d53ef78')
   end
 end

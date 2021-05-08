@@ -10,7 +10,7 @@ RSpec.describe CoronaPresenceTracing::CWACheckIn do
       description: 'Fun Activity',
       address: 'Berlin',
       start_time: start_time,
-      end_time: start_time + 15,
+      end_time: start_time + 3600,
       location_type: :temporary_cultural_event
     }
   end
@@ -58,7 +58,7 @@ RSpec.describe CoronaPresenceTracing::CWACheckIn do
 
     it 'returns a correct URL' do
       expect(url)
-        .to eq('https://e.coronawarn.app?v=1#CAESJAgBEgxGdW4gQWN0aXZpdHkaBkJlcmxpbiiQovmQBjCfovmQBhqXAQgBEoABZ3dMTXpFMTUzdFF3QU9mMk1ab1VYWGZ6V1RkbFNwZlM5OWlaZmZtY214T0c5bmpTSzRSVGltRk9Gd0RoNnQwVHl3OFhSMDF1Z0RZanR1S3dqanVLNDlPaDgzRldjdDZYcGVmUGk5U2tqeHZ2ejUzaTlnYU1tVUVjOTZwYnRvYUEaEHIB1CktU-94-5N1e7Rm9asiBAgBEAk=')
+        .to eq('https://e.coronawarn.app?v=1#CAESJAgBEgxGdW4gQWN0aXZpdHkaBkJlcmxpbiiQovmQBjCgvvmQBhp2CAESYIMCzMxNed7UMADn9jGaFF1381k3ZUqX0vfYmX35nJsThvZ40iuEU4phThcA4erdE8sPF0dNboA2I7bisI47iuPTofNxVnLel6Xnz4vUpI8b78-d4vYGjJlBHPeqW7aGgBoQNzIwMWQ0MjkyZDUzZWY3OCIECAEQCQ==')
     end
   end
 end

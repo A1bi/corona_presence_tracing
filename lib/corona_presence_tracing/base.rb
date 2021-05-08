@@ -52,7 +52,7 @@ module CoronaPresenceTracing
     def crowd_notifier_data
       CrowdNotifierData.new(
         version: 1,
-        publicKey: self.class::PUBLIC_KEY,
+        publicKey: Base64.decode64(self.class::PUBLIC_KEY),
         cryptographicSeed: SecureRandom.random_bytes(16)
       )
     end
