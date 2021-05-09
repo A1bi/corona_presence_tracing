@@ -67,9 +67,23 @@ RSpec.describe CoronaPresenceTracing::CWACheckIn do
 
     include_context 'with static crypto seed'
 
-    it 'returns a correct URL' do
-      expect(url)
-        .to eq('https://e.coronawarn.app?v=1#CAESJAgBEgxGdW4gQWN0aXZpdHkaBkJlcmxpbiiQovmQBjCgvvmQBhp2CAESYIMCzMxNed7UMADn9jGaFF1381k3ZUqX0vfYmX35nJsThvZ40iuEU4phThcA4erdE8sPF0dNboA2I7bisI47iuPTofNxVnLel6Xnz4vUpI8b78-d4vYGjJlBHPeqW7aGgBoQNzIwMWQ0MjkyZDUzZWY3OCIECAEQCQ==')
+    context 'with a temporary location' do
+      it 'returns a correct URL' do
+        expect(url)
+          .to eq('https://e.coronawarn.app?v=1#CAESJAgBEgxGdW4gQWN0aXZpdHkaBkJlcmxpbiiQovmQBjCgvvmQBhp2CAESYIMCzMxNed7UMADn9jGaFF1381k3ZUqX0vfYmX35nJsThvZ40iuEU4phThcA4erdE8sPF0dNboA2I7bisI47iuPTofNxVnLel6Xnz4vUpI8b78-d4vYGjJlBHPeqW7aGgBoQNzIwMWQ0MjkyZDUzZWY3OCIECAEQCQ==')
+      end
+    end
+
+    context 'with a permanent location' do
+      before do
+        event_data[:location_type] = :permanent_food_service
+        event_data[:default_check_in_length] = 120
+      end
+
+      it 'returns a correct URL' do
+        expect(url)
+          .to eq('https://e.coronawarn.app?v=1#CAESJAgBEgxGdW4gQWN0aXZpdHkaBkJlcmxpbiiQovmQBjCgvvmQBhp2CAESYIMCzMxNed7UMADn9jGaFF1381k3ZUqX0vfYmX35nJsThvZ40iuEU4phThcA4erdE8sPF0dNboA2I7bisI47iuPTofNxVnLel6Xnz4vUpI8b78-d4vYGjJlBHPeqW7aGgBoQNzIwMWQ0MjkyZDUzZWY3OCIGCAEQBBh4')
+      end
     end
   end
 end

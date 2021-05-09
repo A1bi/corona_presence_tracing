@@ -78,7 +78,7 @@ module CoronaPresenceTracing
 
   class CWACheckInValidator < CheckInValidator
     ALLOWED_LOCATION_TYPES = %i[
-      permanent_retail permanent_food_servicepermanent_craft permanent_workplace
+      permanent_retail permanent_food_service permanent_craft permanent_workplace
       permanent_educational_institution permanent_public_building permanent_other
       temporary_cultural_event temporary_club_activity temporary_private_event
       temporary_worship_service temporary_other
