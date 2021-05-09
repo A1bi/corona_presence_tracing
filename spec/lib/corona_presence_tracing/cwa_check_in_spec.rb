@@ -51,6 +51,17 @@ RSpec.describe CoronaPresenceTracing::CWACheckIn do
     end
   end
 
+  describe '.decode' do
+    subject(:check_in) { described_class.decode(encoded_payload) }
+
+    let(:encoded_payload) { 'CAESJAgBEgxGdW4gQWN0aXZpdHkaBkJlcmxpbiiQovmQBjCgvvmQBhp2CAESYIMCzMxNed7UMADn9jGaFF1381k3ZUqX0vfYmX35nJsThvZ40iuEU4phThcA4erdE8sPF0dNboA2I7bisI47iuPTofNxVnLel6Xnz4vUpI8b78-d4vYGjJlBHPeqW7aGgBoQNzIwMWQ0MjkyZDUzZWY3OCIGCAEQAxgt' } # rubocop:disable Layout/LineLength
+
+    it 'returns an instance with correct vendor attributes' do
+      expect(check_in.location_type).to eq(:permanent_retail)
+      expect(check_in.default_check_in_length).to eq(45)
+    end
+  end
+
   describe '#url' do
     subject(:url) { check_in.url }
 

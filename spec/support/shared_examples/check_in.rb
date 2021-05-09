@@ -45,6 +45,33 @@ RSpec.shared_examples 'generic check-in' do
     end
   end
 
+  describe '.decode' do
+    subject(:check_in) { described_class.decode(encoded_payload) }
+
+    let(:encoded_payload) { 'CAESJAgBEgxGdW4gQWN0aXZpdHkaBkJlcmxpbiiQovmQBjCgvvmQBhp2CAESYIMCzMxNed7UMADn9jGaFF1381k3ZUqX0vfYmX35nJsThvZ40iuEU4phThcA4erdE8sPF0dNboA2I7bisI47iuPTofNxVnLel6Xnz4vUpI8b78-d4vYGjJlBHPeqW7aGgBoQNzIwMWQ0MjkyZDUzZWY3OCIECAEQCQ==' } # rubocop:disable Layout/LineLength
+
+    shared_examples 'generic payload decoder' do
+      it 'returns an instance with correct attributes' do
+        expect(check_in.description).to eq('Fun Activity')
+        expect(check_in.address).to eq('Berlin')
+
+        start_time = Time.parse('2022-03-01 18:00')
+        expect(check_in.start_time).to eq(start_time)
+        expect(check_in.end_time).to eq(start_time + 3600)
+      end
+    end
+
+    context 'with only the payload' do
+      it_behaves_like 'generic payload decoder'
+    end
+
+    context 'with a full url' do
+      let(:encoded_payload) { "https://example.com/foo##{super()}" }
+
+      it_behaves_like 'generic payload decoder'
+    end
+  end
+
   describe '#encoded_payload' do
     subject { check_in.encoded_payload }
 

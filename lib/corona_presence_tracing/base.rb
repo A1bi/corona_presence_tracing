@@ -10,6 +10,32 @@ module CoronaPresenceTracing
   module Base
     attr_reader :description, :address, :start_time, :end_time
 
+    def self.included(base)
+      base.extend ClassMethods
+    end
+
+    module ClassMethods
+      def decode(encoded_payload)
+        base64_segment = encoded_payload.split('#').last
+        qr_payload = QRCodePayload.decode(Base64.urlsafe_decode64(base64_segment))
+        location = qr_payload.locationData
+
+        new(
+          description: location.description,
+          address: location.address,
+          start_time: Time.at(location.startTimestamp),
+          end_time: Time.at(location.endTimestamp),
+          **vendor_info(qr_payload.countryData)
+        )
+      end
+
+      private
+
+      def vendor_info(_country_data)
+        {}
+      end
+    end
+
     def initialize(options = {})
       @description = options[:description]
       @address = options[:address]
