@@ -20,8 +20,12 @@ module CoronaPresenceTracing
       build_payload
     end
 
+    def encoded_payload
+      @encoded_payload ||= Base64.urlsafe_encode64(QRCodePayload.encode(@qr_payload))
+    end
+
     def url
-      "#{self.class::BASE_URL}##{encoded_payload}"
+      [self.class::BASE_URL, encoded_payload].join('#')
     end
 
     private
@@ -65,10 +69,6 @@ module CoronaPresenceTracing
       return unless vendor_data
 
       vendor_data.class.encode(vendor_data)
-    end
-
-    def encoded_payload
-      Base64.urlsafe_encode64(QRCodePayload.encode(@qr_payload))
     end
   end
 end

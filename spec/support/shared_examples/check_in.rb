@@ -44,6 +44,26 @@ RSpec.shared_examples 'generic check-in' do
       include_examples 'raising a validation error', :end_time, :invalid
     end
   end
+
+  describe '#encoded_payload' do
+    subject { check_in.encoded_payload }
+
+    let(:check_in) { described_class.new(event_data) }
+
+    it 'returns identical output for consecutive method calls' do
+      expect(subject).to eq(check_in.encoded_payload)
+    end
+  end
+
+  describe '#url' do
+    subject { check_in.url }
+
+    let(:check_in) { described_class.new(event_data) }
+
+    it 'returns identical output for consecutive method calls' do
+      expect(subject).to eq(check_in.url)
+    end
+  end
 end
 
 RSpec.shared_context 'with static crypto seed' do
