@@ -1,5 +1,6 @@
 /.bundle
 /coverage
+/pkg
 /tmp
 Gemfile.lock
 .rspec_status
