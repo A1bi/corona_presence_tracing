@@ -33,7 +33,7 @@ RSpec.shared_examples 'generic check-in' do
     end
 
     context 'with a date before 1970' do
-      before { event_data[:start_time] = Time.parse('1969-12-31') }
+      before { event_data[:start_time] = Time.new(1969, 12, 31) }
 
       include_examples 'raising a validation error', :start_time, :invalid
     end
@@ -55,7 +55,7 @@ RSpec.shared_examples 'generic check-in' do
         expect(check_in.description).to eq('Fun Activity')
         expect(check_in.address).to eq('Berlin')
 
-        start_time = Time.parse('2022-03-01 18:00')
+        start_time = Time.new(2022, 3, 1, 18)
         expect(check_in.start_time).to eq(start_time)
         expect(check_in.end_time).to eq(start_time + 3600)
       end

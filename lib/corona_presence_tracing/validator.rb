@@ -19,9 +19,9 @@ module CoronaPresenceTracing
 
     def validate
       validate_presence_of :description, :address
-      validate_type_of :description, :address, [String]
+      validate_type_of :description, :address, %w[String]
       validate_length_of :description, :address, max: 100
-      validate_type_of :start_time, :end_time, [DateTime, Time, Date]
+      validate_type_of :start_time, :end_time, %w[DateTime Time Date]
       validate_dates
     end
 
@@ -42,7 +42,9 @@ module CoronaPresenceTracing
 
     def validate_type_of(*attrs, types)
       validate_attrs(attrs) do |attr, value|
-        raise_error(attr, :type, "must be a #{types.join(' or ')}") unless value.nil? || types.include?(value.class)
+        unless value.nil? || types.include?(value.class.to_s)
+          raise_error(attr, :type, "must be a #{types.join(' or ')}")
+        end
       end
     end
 
@@ -55,7 +57,7 @@ module CoronaPresenceTracing
     end
 
     def validate_dates
-      min = Time.parse('1970-01-01')
+      min = Time.at(0)
       validate_attrs(%i[start_time end_time]) do |attr, value|
         raise_error(attr, :invalid, "must be after #{min}") if value && value < min
       end
@@ -85,10 +87,10 @@ module CoronaPresenceTracing
     ].freeze
 
     def validate
-      validate_type_of :location_type, [Symbol, String]
+      validate_type_of :location_type, %w[Symbol String]
       validate_inclusion_of :location_type, ALLOWED_LOCATION_TYPES
       validate_presence_of :default_check_in_length unless temporary_location?
-      validate_type_of :default_check_in_length, [Integer]
+      validate_type_of :default_check_in_length, %w[Integer]
       validate_inclusion_of :default_check_in_length, (0..1440)
       super
     end

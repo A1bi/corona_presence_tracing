@@ -5,7 +5,7 @@ require_relative '../../support/shared_examples/check_in'
 RSpec.describe CoronaPresenceTracing::CWACheckIn do
   let(:check_in) { described_class.new(event_data) }
   let(:event_data) do
-    start_time = Time.parse('2022-03-01 18:00')
+    start_time = Time.new(2022, 3, 1, 18)
     {
       description: 'Fun Activity',
       address: 'Berlin',
