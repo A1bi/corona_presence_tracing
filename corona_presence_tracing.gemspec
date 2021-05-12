@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   s.email         = ['albrecht@oster.online']
 
   s.summary       = 'Corona check-in link and QR code generator'
-  s.description   = 'Implementation of the Corona Presence Tracing specification for check-in links and QR codes' \
-                       'using Corona Contact Tracing apps.'
+  s.description   = 'Implementation of the Presence Tracing (also known as Event Registration) specification ' \
+                    'for check-in links and QR codes using COVID-19 Contact Tracing apps'
   s.homepage      = 'https://github.com/A1bi/corona_presence_tracing'
   s.license       = 'MIT'
 
