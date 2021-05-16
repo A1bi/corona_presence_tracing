@@ -21,7 +21,7 @@ module CoronaPresenceTracing
       validate_presence_of :description, :address
       validate_type_of :description, :address, %w[String]
       validate_length_of :description, :address, max: 100
-      validate_type_of :start_time, :end_time, %w[DateTime Time Date]
+      validate_type_of :start_time, :end_time, %w[DateTime Time Date ActiveSupport::TimeWithZone]
       validate_dates
     end
 
