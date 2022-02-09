@@ -29,7 +29,7 @@ module CoronaPresenceTracing
 
     def validate_presence_of(*attrs)
       validate_attrs(attrs) do |attr, value|
-        raise_error(attr, :blank, "can't be blank") if value.nil? || value.is_a?(String) && value.empty?
+        raise_error(attr, :blank, "can't be blank") if value.nil? || (value.is_a?(String) && value.empty?)
       end
     end
 
