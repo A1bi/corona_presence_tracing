@@ -25,7 +25,7 @@ module CoronaPresenceTracing
           address: location.address,
           start_time: Time.at(location.startTimestamp),
           end_time: Time.at(location.endTimestamp),
-          **vendor_info(qr_payload.countryData)
+          **vendor_info(qr_payload.vendorData)
         )
       end
 
@@ -65,7 +65,7 @@ module CoronaPresenceTracing
         version: 1,
         locationData: location_data,
         crowdNotifierData: crowd_notifier_data,
-        countryData: encoded_vendor_data
+        vendorData: encoded_vendor_data
       )
     end
 

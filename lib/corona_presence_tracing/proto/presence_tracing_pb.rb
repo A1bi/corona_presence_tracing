@@ -9,7 +9,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :version, :uint32, 1
       optional :locationData, :message, 2, "corona_presence_tracing.TraceLocation"
       optional :crowdNotifierData, :message, 3, "corona_presence_tracing.CrowdNotifierData"
-      optional :countryData, :bytes, 4
+      optional :vendorData, :bytes, 4
     end
     add_message "corona_presence_tracing.TraceLocation" do
       optional :version, :uint32, 1
